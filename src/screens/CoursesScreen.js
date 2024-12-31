@@ -36,8 +36,8 @@ const CoursesScreen = () => {
   }
 
   return (
-    <section class="bg-white space-y-10 mb-20">
-      <h2 class="mt-10 text-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+    <section className="bg-white space-y-10 mb-20">
+      <h2 className="mt-10 text-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
         Top Courses
       </h2>
 
@@ -57,7 +57,7 @@ const CoursesScreen = () => {
         }
       </ul>
 
-      <h2 class="mt-10 text-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
+      <h2 className="mt-10 text-center text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl">
         All Courses
       </h2>
 
