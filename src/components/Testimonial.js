@@ -7,7 +7,8 @@ const Testimonial = ({
     name,
     description,
     deleteTestimonial = false,
-    onDelete
+    onDelete,
+    isValidating
 }) => {
     return (
         <div className="flex h-full flex-col justify-between bg-white p-6 shadow-sm sm:p-8">
@@ -20,7 +21,8 @@ const Testimonial = ({
                                 <Rating key={Math.random()} />
                             ))}
                     </div>
-                    {deleteTestimonial && (<button type='button' onClick={onDelete}>
+                    <div className={`text-center ${isValidating ? 'animate-pulse' : 'hidden'}`}>Is validating</div>
+                    {!isValidating && deleteTestimonial && (<button type='button' onClick={onDelete}>
                         <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <title>logo</title>
                             <g id="SVGRepo_bgCarrier" strokeWidth="0" />
