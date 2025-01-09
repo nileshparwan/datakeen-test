@@ -26,13 +26,13 @@ const Review = ({ allReviews }) => {
 
     return (
         <>
-            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+            <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3 relative">
                 {
                     Array.isArray(data) && data
                         .filter((product) => product.rating > 4)
                         .map((testimonial) => (
                             <Testimonial
-                                key={testimonial.id}
+                                key={testimonial._id}
                                 rating={testimonial.rating}
                                 title={testimonial.title}
                                 name={testimonial.name}
@@ -40,37 +40,33 @@ const Review = ({ allReviews }) => {
                             />
                         ))
                 }
-                
+
 
                 {
                     allReviews && (
-                        <>
-                            {
-                                Array.isArray(data) && data
-                                    .filter((testimonial) => testimonial.rating < 5)
-                                    .map((testimonial) => (
-                                        <Testimonial
-                                            key={testimonial.id}
-                                            rating={testimonial.rating}
-                                            title={testimonial.title}
-                                            name={testimonial.name}
-                                            description={testimonial.description}
-                                            deleteTestimonial={isSignedIn ?? true}
-                                            onDelete={() => deleteHandler(testimonial.id)}
-                                            isValidating={testimonial.new}
-                                        />
-                                    ))
-                            }
-                            {
-                                isValidating && <div className='text-2xl text-gray-500'>Refreshing...</div>
-                            }
-                        </>
+                        Array.isArray(data) && data
+                            .filter((testimonial) => testimonial.rating < 5)
+                            .map((testimonial) => (
+                                <Testimonial
+                                    key={testimonial._id}
+                                    rating={testimonial.rating}
+                                    title={testimonial.title}
+                                    name={testimonial.name}
+                                    description={testimonial.description}
+                                    deleteTestimonial={isSignedIn ?? true}
+                                    onDelete={() => deleteHandler(testimonial._id)}
+                                    isValidating={testimonial.new}
+                                />
+                            ))
                     )
                 }
 
-
+                {
+                    isValidating && <div className='fixed right-0 bottom-0 bg-gray-400 mr-5 mb-5'>
+                        <p className='text-2xl text-gray-500 p-5 text-white'>Refreshing...</p>
+                    </div>
+                }
             </div>
-
 
             {isSignedIn && (<div className="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8">
                 <div className="mx-auto max-w-lg text-center">

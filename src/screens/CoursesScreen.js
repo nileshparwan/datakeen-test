@@ -4,7 +4,7 @@ import { preload } from 'swr';
 import Courses from '../components/Courses';
 import { fetcher } from '../lib/swr.utils';
 
-preload("http://localhost:3001/api/products", fetcher);
+preload("http://localhost:3001/api/courses", fetcher);
 
 const CoursesScreen = () => {
   return (

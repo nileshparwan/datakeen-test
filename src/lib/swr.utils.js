@@ -29,7 +29,6 @@ export function useSwr({ url, params }) {
 
 export const createTestimonial = async (previousData, newData) => {
     try {
-        console.log({ ...newData, new: true });
         mutate(
             API_TESTIMONIAL_URL,
             (existingData) => [...existingData, { ...newData, new: true }],
@@ -58,7 +57,7 @@ export const createTestimonial = async (previousData, newData) => {
         return result;
     } catch (error) {
         console.error('Error creating resource:', error);
-        throw error;
+        toast.error("Testimonial created successfully");
     }
 };
 
@@ -86,6 +85,7 @@ export const deleteTestimonial = async (previousData, id) => {
 
         const result = await response.json();
         toast.success("Testimonial deleted successfully");
+        mutate(API_TESTIMONIAL_URL);
         return result;
 
     } catch (error) {
