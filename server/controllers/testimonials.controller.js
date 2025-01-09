@@ -1,13 +1,13 @@
-import { testimonials } from "../data/testimonials.js";
+import Testimonial from "../models/testimonial.model.js";
 
 /**
  * @desc All testimonials
  * @route get /api/testimonials
  * @access  Public
  */
-export const getTestimonials = (req, res) => {
+export const getTestimonials = async (req, res) => {
     try {
-        const result = testimonials; 
+        const result = await Testimonial.find(); 
         res.json(result);
       } catch (error) {
         console.error("Error fetching testimonials: ", error);
@@ -20,18 +20,18 @@ export const getTestimonials = (req, res) => {
  * @route POST /api/testimonials
  * @access  Private
  */
-export const createTestimonial = (req, res) => {
+export const createTestimonial = async (req, res) => {
     try {
         const { rating, course, name, comments } = req.body;
-        const newTestimonial = {
-            id: testimonials.length + 1,
+        const newTestimonial = new Testimonial({
             rating,
+            user: '677e678b0c7c5349aa67b974',
             title: course,
             name,
             description: comments
-        };
-        testimonials.push(newTestimonial);
-        res.status(201).json(newTestimonial);
+        });
+        const savedTestimonial = await newTestimonial.save();
+        res.status(201).json(savedTestimonial);
     } catch (error) {
         console.error("Error creating testimonial: ", error);
         res.status(500).json({ message: 'Internal Server Error' });
@@ -43,12 +43,14 @@ export const createTestimonial = (req, res) => {
  * @route POST /api/testimonials
  * @access  Private
  */
-export const deleteTestimonial = (req, res) => {
+export const deleteTestimonial = async (req, res) => {
     try {
         const { id } = req.params;
-        const index = testimonials.findIndex(testimonial => testimonial.id === id);
-        testimonials.splice(index, 1);
-        res.status(200).json({ message: 'Testimonial deleted successfully' });
+        const findTestimonial = await Testimonial.findById(id);
+        if (findTestimonial) {
+            await Testimonial.deleteOne({ _id: findTestimonial._id });
+            res.status(200).json({ message: 'Testimonial deleted successfully' });
+        }
     } catch (error) {
         console.error("Error deleting testimonial: ", error);
         res.status(500).json({ message: 'Internal Server Error' });

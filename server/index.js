@@ -1,5 +1,6 @@
 import init from './server.js';
-import productsRoutes from './routes/products.routes.js';
+import userRoutes from './routes/users.routes.js';
+import coursesRoutes from './routes/courses.routes.js';
 import testimonialsRoutes from './routes/testimonials.routes.js';
 
 const start = () => {
@@ -7,10 +8,13 @@ const start = () => {
     const PORT = process.env.PORT || 3001;
 
     // routes
-    app.use('/api/products', productsRoutes);
+    app.use('/api/courses', coursesRoutes);
     app.use('/api/testimonials', testimonialsRoutes);
-
-    app.listen(PORT, () => console.log('Server running on port:', PORT));
+    app.use('/api/users', userRoutes);
+    
+    app.listen(PORT, () => {
+        console.log('Server running on port:', PORT)
+    });
 };
 
 start();

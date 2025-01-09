@@ -1,31 +1,38 @@
 import express from 'express';
 import dotEnv from 'dotenv';
 import cors from 'cors';
+import mongoDB from './config/db.js';
+
+// models
+import './models/course.model.js'
+import './models/testimonial.model.js'
+import './models/user.model.js'
 
 export default () => {
-    const app = express();
     dotEnv.config();
-    const corsOptions = {
-        AccessControlAllowOrigin: '*',
-        origin: '*',
-        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
-    };
-    app.use(cors(corsOptions));
+    const app = express();
 
+    // CORS middleware
+    app.use(cors({
+        origin: '*',
+        methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
+    }));
+
+    // Body parsing middleware
     app.use(express.json());
     app.use(express.urlencoded({ extended: true }));
 
-    app.use((req, res, next) => {
-        if (req.method === "OPTIONS") {
-            return res.status(200).json({});
-        }
-        next();
+    // Error Handling Middleware
+    app.use((err, req, res, next) => {
+        console.error(`Error: ${err.message}`);
+        res.status(err.status || 500).json({
+            success: false,
+            message: err.message || "Server Error",
+        });
     });
 
-    app.use((err, req, res, next) => {
-        console.error(err.stack);
-        res.status(500).send('Something broke!');
-    });
+    // Initialize MongoDB
+    mongoDB();
 
     return app;
 };

@@ -1,13 +1,13 @@
-import { products } from "../data/products.js";
+import Course from "../models/course.model.js";
 
 /**
  * @desc All products
  * @route POST /api/products
  * @access  Public
  */
-export const getProducts = (req, res) => {
+export const getCourses = async (req, res) => {
     try {
-        const result = products; 
+        const result = await Course.find(); 
         res.json(result);
       } catch (error) {
         console.error("Error fetching products: ", error);

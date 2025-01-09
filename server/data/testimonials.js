@@ -1,4 +1,4 @@
-export const testimonials = [
+const testimonials = [
     {
       "id": 1,
       "rating": "5",
@@ -71,3 +71,4 @@ export const testimonials = [
     }
   ]
   
+  export default testimonials;
