@@ -63,7 +63,7 @@ const Review = ({ allReviews }) => {
 
                 {
                     isValidating && <div className='fixed right-0 bottom-0 bg-gray-400 mr-5 mb-5'>
-                        <p className='text-2xl text-gray-500 p-5 text-white'>Refreshing...</p>
+                        <p className='text-2xl p-5 text-white'>Refreshing...</p>
                     </div>
                 }
             </div>
