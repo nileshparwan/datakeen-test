@@ -1,70 +1,110 @@
-# Getting Started with Create React App
+# Datakeen
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview
 
-## Available Scripts
+**Datakeen** is a React-based application aimed at helping users find the right course. The project leverages various modern technologies and frameworks to deliver an efficient and user-friendly experience. It includes features such as form handling, routing, and user notifications, while integrating with Clerk for authentication.
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **React 18** for a modern and efficient UI.
+- **React Router 6** for seamless navigation between different pages.
+- **React Hook Form** and **Zod** for robust form handling and validation.
+- **Clerk Authentication** integration for user management.
+- **React Toastify** for user notifications.
+- **Typewriter Effects** with **react-typewriter**.
+- **Swiper** for interactive content sliders.
+- **TailwindCSS** for fast and customizable styling.
+- **Nodemon** for backend development and hot reloading.
+- **Concurrently** to run both the frontend and backend development servers together.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Getting Started
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Prerequisites
 
-### `npm test`
+Make sure you have the following installed:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js (v14 or above)
+- npm (v6 or above)
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/datakeen.git
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Navigate to the project directory:
+   ```bash
+   cd datakeen
+   ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Install the dependencies:
+   ```bash
+   npm install
+   ```
 
-### `npm run eject`
+### Running the Application
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+To start the development server, use:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm run dev
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+This command will run both the React frontend and the Node.js backend simultaneously.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Building the Application
 
-## Learn More
+To build the production version of the app, run:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm run build
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+The output will be located in the `build/` directory.
 
-### Code Splitting
+### Running Tests
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+To run tests, use:
 
-### Analyzing the Bundle Size
+```bash
+npm run test
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Tech Stack
 
-### Making a Progressive Web App
+- **React** (v18.3.1)
+- **React Router** (v6.27.0)
+- **React Hook Form** (v7.53.0)
+- **Clerk** for authentication
+- **TailwindCSS** (v3.4.14)
+- **Zod** for validation
+- **Nodemon** for backend development
+- **Concurrently** to manage multiple processes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Scripts
 
-### Advanced Configuration
+- `npm run start`: Starts the React app.
+- `npm run build`: Builds the app for production.
+- `npm run test`: Runs the test suite.
+- `npm run eject`: Ejects the app configuration.
+- `npm run server`: Starts the Node.js backend using Nodemon.
+- `npm run dev`: Runs both the frontend and backend in development mode.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Folder Structure
 
-### Deployment
+- `/src` - Contains the frontend code.
+- `/server` - Contains the backend Node.js code.
+- `/public` - Static assets for the frontend.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Contributing
 
-### `npm run build` fails to minify
+Feel free to submit issues or pull requests to improve the project. Contributions are welcome!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## License
+
+This project is licensed under the MIT License.
+
+---
+
+You can adapt this as needed based on your project’s requirements!
