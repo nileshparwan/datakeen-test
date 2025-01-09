@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { testimonialSchema } from "../lib/zod/schema";
 
 
-const TestimonialForm = ({createTestimonial}) => {
+const TestimonialForm = ({saveTestimonial}) => {
     const {
         register,
         handleSubmit,
@@ -13,7 +13,7 @@ const TestimonialForm = ({createTestimonial}) => {
     });
 
     const onSubmit = async (data) => {
-        await createTestimonial(data);
+        await saveTestimonial(data);
     };
 
     return (

@@ -77,7 +77,7 @@ const Review = ({ allReviews }) => {
                     </p>
                 </div>
 
-                <TestimonialForm createTestimonial={createHandler} />
+                <TestimonialForm saveTestimonial={createHandler} />
             </div>)}
         </>
     );
