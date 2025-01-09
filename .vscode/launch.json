@@ -2,7 +2,7 @@
     "configurations": [
       {
         "name": "server debug",
-        "command": "cd ./server && npm run start",
+        "command": "cd ./server && npm run server",
         "request": "launch",
         "type": "node-terminal"
       }
