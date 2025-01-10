@@ -1,6 +1,6 @@
 import React, { Suspense, useState } from 'react';
 import { API_TESTIMONIAL_URL, fetcher } from '../lib/swr.utils';
-import Review from '../components/Review';
+import Testimonials from '../components/Testimonials';
 import { preload } from 'swr';
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -51,7 +51,7 @@ const ReviewScreen = () => {
 
         <ErrorBoundary fallback={<h2>Could not fetch posts.</h2>}>
           <Suspense fallback={<h2>Loading...</h2>}>
-            <Review allReviews={allReviews} />
+            <Testimonials allReviews={allReviews} />
           </Suspense>
         </ErrorBoundary>
 

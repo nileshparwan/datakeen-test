@@ -17,7 +17,7 @@ import SignInScreen from './screens/SignInScreen';
 import 'swiper/css';
 import ContactScreen from './screens/ContactScreen';
 import CoursesScreen from './screens/CoursesScreen';
-import ReviewScreen from './screens/ReviewScreen';
+import TestimonialScreen from './screens/TestimonialScreen';
 import ErrorScreen from './screens/ErrorScreen';
 
 const PUBLISHABLE_KEY = process.env.REACT_APP_CLERK_PUBLISHABLE_KEY;
@@ -42,7 +42,7 @@ const router = createBrowserRouter(createRoutesFromElements(
     <Route
       path="/reviews"
       index={true}
-      element={<ReviewScreen />}
+      element={<TestimonialScreen />}
     />
 
     <Route
