@@ -3,13 +3,19 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { testimonialSchema } from "../lib/zod/schema";
 
 
-const TestimonialForm = ({saveTestimonial}) => {
+const TestimonialForm = ({ saveTestimonial, testimonialData }) => {
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm({
         resolver: zodResolver(testimonialSchema),
+        defaultValues: {
+            name: testimonialData?.name || "",
+            course: testimonialData?.title || "",
+            rating: testimonialData?.rating || 0,            
+            comments: testimonialData?.description || ""  
+        }
     });
 
     const onSubmit = async (data) => {

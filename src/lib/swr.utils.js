@@ -1,5 +1,6 @@
 import { toast } from 'react-toastify';
 import useSWR, { mutate } from 'swr';
+import { optional } from 'zod';
 
 export const fetcher = async (url) => {
     const res = await fetch(url);
@@ -21,7 +22,9 @@ export function useSwr({ url, params }) {
         ? `?${new URLSearchParams(params).toString()}`
         : '';
     const newUrl = `${url}${queryString}`;
-    const { data, error, isLoading, isValidating } = useSWR(newUrl, fetcher, { suspense: true });
+    const { data, error, isLoading, isValidating } = useSWR(newUrl, fetcher, {
+        suspense: true
+    });
     return { data, error, isLoading, isValidating };
 }
 
@@ -31,9 +34,24 @@ export const createTestimonial = async (previousData, newData) => {
     try {
         mutate(
             API_TESTIMONIAL_URL,
-            (existingData) => [...existingData, { ...newData, new: true }],
+            (existingData) => [...existingData, {
+                title: newData.course,
+                rating: newData.rating,
+                name: newData.name,
+                description: newData.comments,
+                new: true
+            }],
             {
-                optimisticData: [...previousData, { ...newData, new: true }],
+                optimisticData: [
+                    ...previousData,
+                    {
+                        title: newData.course,
+                        rating: newData.rating,
+                        name: newData.name,
+                        description: newData.comments,
+                        new: true
+                    }
+                ],
                 rollbackOnError: true,
                 populateCache: true,
                 revalidate: false
@@ -52,8 +70,9 @@ export const createTestimonial = async (previousData, newData) => {
         }
         const result = await response.json();
         toast.success("Testimonial created successfully");
-        // revalidate the data
-        mutate(API_TESTIMONIAL_URL);
+        setTimeout(() => {
+            mutate(API_TESTIMONIAL_URL);
+        }, 3000);
         return result;
     } catch (error) {
         console.error('Error creating resource:', error);
@@ -61,14 +80,63 @@ export const createTestimonial = async (previousData, newData) => {
     }
 };
 
-
-export const deleteTestimonial = async (previousData, id) => {
+export const updateTestimonial = async (previousData, newData, id) => {
     try {
         mutate(
             API_TESTIMONIAL_URL,
-            (existingData) => [...(existingData.filter(exist => exist.id !== id))],
+            (existingData) => existingData.map(exist => exist._id === id ? {
+                title: newData.course,
+                rating: newData.rating,
+                name: newData.name,
+                description: newData.comments,
+                new: true
+            } : exist),
             {
-                optimisticData: [...(previousData.filter(exist => exist.id !== id))],
+                optimisticData: previousData.map(exist => exist._id === id ? {
+                    title: newData.course,
+                    rating: newData.rating,
+                    name: newData.name,
+                    description: newData.comments,
+                    new: true
+                } : exist),
+                rollbackOnError: true,
+                populateCache: true,
+                revalidate: false,
+            }
+        );
+
+        const reponse = await fetch(`${API_TESTIMONIAL_URL}/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newData)
+        });
+        
+        if (!reponse.ok) {
+            throw new Error("Failed to create testimonial");
+        }
+        
+        const result = await reponse.json();
+        toast.success(result.message);
+        setTimeout(() => {
+            mutate(API_TESTIMONIAL_URL);
+        }, 3000);
+    } catch (error) {
+        console.error('Error updating resource:', error);
+        toast.error("Error updating testimonial");
+    }
+};
+
+
+export const deleteTestimonial = async (previousData, id) => {
+    console.log(previousData.filter(exist => exist._id !== id));
+    try {
+        mutate(
+            API_TESTIMONIAL_URL,
+            (existingData) => [...(existingData.filter(exist => exist._id !== id))],
+            {
+                optimisticData: [...(previousData.filter(exist => exist._id !== id))],
                 rollbackOnError: true,
                 populateCache: true,
                 revalidate: false
@@ -85,7 +153,9 @@ export const deleteTestimonial = async (previousData, id) => {
 
         const result = await response.json();
         toast.success("Testimonial deleted successfully");
-        mutate(API_TESTIMONIAL_URL);
+        setTimeout(() => {
+            mutate(API_TESTIMONIAL_URL);
+        }, 3000);
         return result;
 
     } catch (error) {
