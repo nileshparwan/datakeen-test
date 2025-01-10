@@ -56,3 +56,29 @@ export const deleteTestimonial = async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error' });
     }
 };
+
+export const updateTestimonial = async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { rating, course, name, comments } = req.body;
+        const findTestimonial = await Testimonial.findById(id);
+        
+        if (!findTestimonial) {
+            console.error(`Cannot find testimonial with id: ${id}`);
+            throw new Error('Cannot find testimonial');
+        }
+
+        const result = await Testimonial.updateOne({ _id: findTestimonial._id.toString() }, { rating, title: course, name, description: comments });
+        
+        if(result.matchedCount === 0) {
+            console.error(`Error updating testimonial with id: ${id}`);
+            throw new Error(`Error updating testimonial with id: ${id}`);
+        }
+
+        res.status(200).json({ message: 'Testimonial updated successfully' });
+
+    } catch (error) {
+        console.error("Error updating testimonial: ", error);
+        res.status(500).json({ message: 'Internal Server Error' });
+    }
+}

@@ -1,5 +1,5 @@
 import express from 'express';
-import { getTestimonials, createTestimonial, deleteTestimonial } from '../controllers/testimonials.controller.js';
+import { getTestimonials, createTestimonial, deleteTestimonial, updateTestimonial } from '../controllers/testimonials.controller.js';
 
 const router = express.Router();
 
@@ -9,5 +9,6 @@ router.route('/')
 
 router.route('/:id')
     .delete(deleteTestimonial)
+    .put(updateTestimonial)
 
 export default router;
